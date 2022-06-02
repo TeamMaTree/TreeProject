@@ -1,0 +1,7 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "condition.jar"
+    ]
+}
