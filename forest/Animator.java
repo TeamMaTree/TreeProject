@@ -1,7 +1,9 @@
-public class Animator {
+package forest;
 
-	public void Play() {
+public class Animator 
+{
+	public void Play() 
+	{
 
 	}
-
 }

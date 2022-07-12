@@ -1,7 +1,9 @@
-public class Parser {
+package forest;
 
-	public Data ToData(string text) {
+public class Parser 
+{
+	public Data ToData(String text)
+	{
 		return null;
 	}
-
 }

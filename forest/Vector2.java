@@ -1,3 +1,5 @@
-public class Vector2 {
+package forest;
+public class Vector2 
+{
 
 }

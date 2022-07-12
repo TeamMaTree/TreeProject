@@ -1,7 +1,9 @@
-public class File {
+package forest;
 
-	public string Read(string fileName) {
+public class File 
+{
+	public String Read(String fileName) 
+	{
 		return null;
 	}
-
 }

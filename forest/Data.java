@@ -1,7 +1,6 @@
-public class Data {
-
-	public string name;
-
+package forest;
+public class Data 
+{
+	public String name;
 	public int indent;
-
 }

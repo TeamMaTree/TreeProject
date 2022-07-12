@@ -1,35 +1,26 @@
-public class OnDragSubject implements Observable_T_ {
+package forest;
 
+import java.util.function.Consumer;
+
+public class OnDragSubject implements Observable<DragData>
+{
 	private DragData dragData;
 
-	public void Attach(Consumer<DragData> func) {
+	@Override
+	public void Attach(Consumer<DragData> func) 
+	{
 
 	}
 
-	public void Notify(DragData dragData) {
+	@Override
+	public void Notify(DragData dragData) 
+	{
 
 	}
 
-	public void Disattach(Consumer func) {
-
+	@Override
+	public void Disattach(Consumer<DragData> func) 
+	{
+	
 	}
-
-
-	/**
-	 * @see Observable<T>#Attach()
-	 *  
-	 */
-	public void Attach(Consumer<T> func) {
-
-	}
-
-
-	/**
-	 * @see Observable<T>#Notify(T)
-	 *  
-	 */
-	public void Notify(T dragData) {
-
-	}
-
 }
