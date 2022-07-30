@@ -7,5 +7,8 @@ public abstract class RendererBase
         DrawInternal(aBrunch);
     }
 
+    /**
+     * Brunchを描画する
+     */
     protected abstract void DrawInternal(Brunch aBrunch);
 }

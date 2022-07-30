@@ -7,5 +7,8 @@ public abstract class RendererBase
         DrawInternal(aRoot);
     }
 
+    /**
+     * Rootを描画する
+     */
     protected abstract void DrawInternal(Root aRoot);
 }

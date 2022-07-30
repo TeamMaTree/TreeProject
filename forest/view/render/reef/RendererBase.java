@@ -6,6 +6,9 @@ public abstract class RendererBase
     {
         DrawInternal(aReef);
     }
-
+    
+    /**
+     * Reefを描画する
+     */
     protected abstract void DrawInternal(Reef aReef);
 }

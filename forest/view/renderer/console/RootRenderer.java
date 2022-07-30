@@ -8,6 +8,6 @@ public class RootRenderer extends RendererBase
 	@Override
 	protected void DrawInternal(Root aRoot) 
 	{
-        
+        System.out.println(aRoot);
 	}
 }

@@ -7,11 +7,10 @@ import forest.view.render.Node;
 public class Root implements Node<RendererBase>
 {
     private ArrayList<Node> children;
-    private Node parent;
 
     private RendererBase renderer;
 
-    public Root(Node parent)
+    public Root()
     {
         
     }
