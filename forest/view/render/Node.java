@@ -1,10 +1,15 @@
 package forest.view.render;
 
 import forest.Vector2;
+import forest.view.render.reef.Reef;
+import java.util.List;
 
-public interface Node<RenderType> extends GenericRenderable<RenderType>
+public interface Node
 {
     public Vector2 GetPosition();
-    public void GetIndent();
-    public void AddChild();
+    public String GetText();
+    public Reef CreateReef(String test);
+    public Node GetParent();
+    public List<Reef> GetReadonlyChildren();
+    public int GetIndex();
 }
