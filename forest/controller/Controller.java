@@ -13,7 +13,13 @@ import java.io.IOException;
  */
 public class Controller 
 {
+    /*
+     * 対象のモデル
+     */
     private Model model;
+    /*
+     * 対象のビュー
+     */
     private View view;
 
     public Controller() throws IOException 

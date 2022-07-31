@@ -8,6 +8,9 @@ import java.awt.Graphics;
 
 public class BrunchRenderer extends RendererBase 
 {
+    /*
+     * このJComponentに図形を表示する
+     */
     private JComponent parentJComponent;
 
     public BrunchRenderer(JComponent parentJComponent)

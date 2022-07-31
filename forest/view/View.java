@@ -14,9 +14,18 @@ import forest.view.render.Renderable;
 import forest.view.render.brunch.Brunch;
 import forest.view.render.reef.Reef;
 
+/*
+ * ビュー
+ */
 public class View 
 {
+    /*
+     * 表示する対象のモデル
+     */
     private Model model;
+    /*
+     * 表示する物のリスト
+     */
     private List<Renderable> rens = new ArrayList<>();
 
     public View(Model aModel) 

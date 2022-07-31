@@ -8,16 +8,19 @@ import java.awt.Graphics;
 
 public class RootRenderer extends RendererBase 
 {
-	private JComponent parentJComponent;
+    /*
+     * このJComponentに図形を表示する
+     */
+    private JComponent parentJComponent;
 
     public RootRenderer(JComponent parentJComponent)
-	{
-		this.parentJComponent = parentJComponent;
-	}
+    {
+        this.parentJComponent = parentJComponent;
+    }
 
-	@Override
-	protected void drawInternal(Root aRoot)
-	{
+    @Override
+    protected void drawInternal(Root aRoot)
+    {
         Graphics gra = parentJComponent.getGraphics();
 
         int height = 15;
@@ -25,5 +28,5 @@ public class RootRenderer extends RendererBase
 
         gra.drawString(aRoot.getText(), 0, maxY / 2);
         gra.drawRect(0, (maxY / 2) - 12, Utility.getWidth(aRoot.getText().length()), height);
-	}
+    }
 }

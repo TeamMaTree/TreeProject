@@ -10,9 +10,9 @@ import forest.view.render.reef.Reef;
 
 public class Root implements Node, GenericRenderable<RendererBase>
 {
-    protected List<Reef> children = new ArrayList<>();
-    protected RendererBase renderer;
-    protected String text;
+    private List<Reef> children = new ArrayList<>();
+    private RendererBase renderer;
+    private String text;
 
     public Root(String text)
     {

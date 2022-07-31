@@ -19,8 +19,17 @@ import java.io.Reader;
  */
 public class Model 
 {
+    /*
+     * 木の親
+     */
     private Root root;
+    /*
+     * 木の葉のリスト
+     */
     private List<Reef> reefList = new ArrayList<>(); 
+    /*
+     * 木の枝のリスト
+     */
     private List<Brunch> brunchList = new ArrayList<>(); 
 
     public Model(File file) throws IOException 
@@ -90,16 +99,25 @@ public class Model
         }
     }
 
+    /*
+     * 木の親を取得する
+     */
     public Root getRoot()
     {
         return root;
     }
 
+    /*
+     * 木の葉のリストを取得する
+     */
     public List<Reef> getReefList()
     {
         return reefList;
     }
 
+    /*
+     * 木の枝のリストを取得する
+     */
     public List<Brunch> getBrunchList()
     {
         return brunchList;

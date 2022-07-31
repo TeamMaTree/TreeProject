@@ -7,6 +7,9 @@ import java.awt.Graphics;
 
 public class ReefRenderer extends forest.view.render.reef.RendererBase 
 {
+    /*
+     * このJComponentに図形を表示する
+     */
     private JComponent parentJComponent;
 
     public ReefRenderer(JComponent parentJComponent)
