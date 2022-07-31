@@ -269,40 +269,230 @@ th {
 <h3><a name="Main">Main（メインクラス）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+package forest;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import forest.view.View;
+import forest.model.Model;
+import java.io.IOException;
+
+public class Main 
+{
+    public static void main(String[] arguments) throws IOException 
+    {
+        JFrame aWindow = new JFrame("Forest");
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.setFileFilter(new FileNameExtensionFilter("*.txt", "txt")); 
+        filechooser.showOpenDialog(aWindow);
+
+        Model model = new Model(filechooser.getSelectedFile());
+
+        View view = new View(model);
+        view.Show();
+    }
+}</pre>
 <div class="belt">
 <h3><a name="Model">Model（モデルクラス）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+package forest.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import forest.view.render.Node;
+import forest.view.render.brunch.Brunch;
+import forest.view.render.reef.Reef;
+import forest.view.render.root.Root;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.Reader;
+
+public class Model 
+{
+    public Root root;
+    public List<Reef> reefs = new ArrayList<>(); 
+    public List<Brunch> brunchs = new ArrayList<>(); 
+
+    public Model(File file) throws IOException 
+    {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader buffer = new BufferedReader((Reader)fileReader);
+
+        String line;
+        while ((line = buffer.readLine()) != null) 
+        {
+            if (line.equals("trees:")) continue;
+            if (line.equals("nodes:")) break;
+
+            int indent = 0;
+
+            String searchStr = "|-- ";
+            
+            int n = line.indexOf(searchStr, 0);
+            int lastN = 0; 
+            while (n != -1)
+            {
+                lastN = n + searchStr.length();
+                n = line.indexOf(searchStr, lastN);
+                indent++;
+            }
+
+            AddNode(indent, line.substring(lastN));
+        }
+
+        fileReader.close();
+        buffer.close();
+    }
+
+    List<Node> parents = new ArrayList<>();
+    int prevIndent;
+    Node prevNode;
+        
+    private void AddNode(int indent, String text)
+    {
+        if (indent == 0) 
+        {
+            root = new Root(text);
+            prevNode = root;
+        }
+        else 
+        {
+            if (prevIndent > indent) parents.remove(parents.get(parents.size() - 1));
+            if (prevIndent < indent) parents.add(prevNode);
+
+            prevIndent = indent;
+
+            Reef reef = new Reef(parents.get(parents.size() - 1), text);
+            reefs.add(reef);
+            brunchs.add(new Brunch(reef));
+            prevNode = reef;
+        }
+    }
+}</pre>
 
 <div class="belt">
 <h3><a name="View">View（ビュークラス）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+package forest.view;
+
+import javax.swing.JFrame;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+
+import forest.Animator;
+import forest.controller.Controller;
+import forest.model.Model;
+import forest.view.render.Renderable;
+import forest.view.render.brunch.Brunch;
+import forest.view.render.reef.Reef;
+
+public class View 
+{
+    private Model model;
+
+    private Controller controller;
+
+    //private Observable observable;
+
+    List<Renderable> rens = new ArrayList<>();
+    private Animator animator;
+
+    public View(Model aModel) 
+    {
+        this.model = aModel;
+    }
+
+    public void Show() 
+    {
+        JFrame aWindow = new JFrame("Forest");
+
+        aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        aWindow.addNotify();
+        int titleBarHeight = aWindow.getInsets().top;
+        Point aPoint = new Point(1000, 1000);
+        aWindow.setMinimumSize(new Dimension(aPoint.x, aPoint.y + titleBarHeight));
+        aWindow.setResizable(false);
+        aWindow.setSize(aPoint.x, aPoint.y + titleBarHeight);
+        aWindow.setLocation(100, 100);
+
+        JPanel mainPanel = new JPanel(null);
+        mainPanel.setBounds(0, 0, aWindow.getWidth(), aWindow.getHeight() - 28);
+
+        aWindow.add(mainPanel);
+        aWindow.setVisible(true);
+        aWindow.toFront();
+
+        model.root.SetRenderer(new forest.view.renderer.swing.RootRenderer(mainPanel));
+        rens.add(model.root);
+        
+        for (Reef reef : model.reefs) 
+        {
+            reef.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
+            rens.add(reef);
+        }
+
+        for (Brunch brunch : model.brunchs) 
+        {
+            brunch.SetRenderer(new forest.view.renderer.swing.BrunchRenderer(mainPanel));
+            rens.add(brunch);
+        }
+        
+        for (Renderable renderable : rens) renderable.Update();
+    }
+
+    public void PlayAnimation() 
+    {
+
+    }
+}</pre>
 
 <div class="belt">
 <h3><a name="Controller">Controller（コントローラ）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+package forest.controller;
+
+import java.util.ArrayList;
+
+import forest.Data;
+import forest.File;
+import forest.Parser;
+import forest.model.Model;
+import forest.view.render.Renderable;
+
+public class Controller 
+{
+	private ArrayList<Renderable> modelList;
+
+	private Model model;
+
+	private File file;
+
+	private Parser parser;
+
+	private Data data;
+
+}</pre>
 
 <div class="belt">
 <h3><a name="forest.mf">forest.mf（マニフェストファイル）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+Manifest-Version: 1.0
+Main-Class: forest.Main</pre>
 
 
 
@@ -310,8 +500,85 @@ th {
 <h3><a name="Makefile">Makefile（メイクファイル）</a></h3>
 </div>
 <pre>
-  
-  
+ANT	= env LC_ALL=ja_JP.UTF-8 ant
+ARCHIVE	= $(shell basename `pwd`)
+SOURCES	= $(shell find . -name "*.java")
+STYLE_YAML	= clang-format-for-java.yaml
+STYLE_CONF	= _clang-format
+
+all:
+	$(ANT) all
+
+clean:
+	$(ANT) clean
+
+test:
+	$(ANT) test
+
+install:
+	$(ANT) install
+
+doc:
+	$(ANT) doc
+
+wipe: clean
+	@find . -name ".DS_Store" -exec rm {} ";" -exec echo rm -f {} ";"
+	(cd ../ ; rm -f ./$(ARCHIVE).zip)
+
+#zip:
+#	$(ANT) zip
+
+zip: wipe
+	@find . -exec touch -t `date "+%Y%m%d%H%M"` {} \; ; xattr -cr .
+	(cd ../ ; zip -r ./$(ARCHIVE).zip ./$(ARCHIVE)/ --exclude='*/.svn/*')*/
+
+format:
+	@rm -f $(STYLE_CONF) ; ln -s $(STYLE_YAML) $(STYLE_CONF)
+	for each in $(SOURCES) ; do echo ---[$${each}]--- ; clang-format -style=file $${each} ; echo ; done
+	@rm -f $(STYLE_CONF)
+
+app: install
+	@xattr -cr ./Tree.app
+	open ./Tree.app
+
+check: if while for ifTrue ifFalse ifThenElse whileTrue whileFalse forEach
+	@:
+
+if:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'if[\ \t]*\(' {} \; | sort
+
+ifTrue:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'ifTrue[\ \t]*\(' {} \; | sort
+
+ifFalse:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'ifFalse[\ \t]*\(' {} \; | sort
+
+ifThenElse:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'ifThenElse[\ \t]*\(' {} \; | sort
+
+while:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'while[\ \t]*\(' {} \; | sort
+
+whileTrue:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'whileTrue[\ \t]*\(' {} \; | sort
+
+whileFalse:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'whileFalse[\ \t]*\(' {} \; | sort
+
+for:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'for[\ \t]*\(' {} \; | sort
+
+forEach:
+	@echo "---<" $@ ">---" 
+	@find . -name '*.java' -exec grep -HnE 'forEach[\ \t]*\(' {} \; | sort
 </pre>
 
 
@@ -320,9 +587,117 @@ th {
 <h3><a name="build.xml">build.xml（ビルドファイル）</a></h3>
 </div>
 <pre>
-  
-  
-</pre>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+
+&lt;project name="forest" default="all" basedir=".">
+
+    &lt;property name="package" value="forest" />
+    &lt;property name="packagenames" value="${package}" />
+    &lt;property name="destdir" value="./Classes" />
+    &lt;property name="docdir" value="./JavaDoc" />
+    &lt;property name="instdir" value="./${ant.project.name}.app/Contents/Resources/Java" />
+    &lt;property name="copyright" value="Copyright 2008-2016 AOKI Atsushi. All Rights Reserved." />
+    &lt;property name="zipname" value="${ant.project.name}" />
+
+    &lt;target name="all" depends="jar" description="build all">
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="prepare" depends="" description="prepare to compile">
+        &lt;mkdir dir="${destdir}" />
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="compile" depends="prepare" description="compile all sources">
+        &lt;javac
+            fork="true"
+            srcdir="${basedir}"
+            destdir="${destdir}"
+            includeAntRuntime="true"
+            encoding="UTF-8"
+            deprecation="on"
+            verbose="false">
+            &lt;compilerarg value="-J-Dfile.encoding=UTF8" />
+            &lt;compilerarg value="-Xlint:all" />
+            &lt;classpath>
+                &lt;pathelement location="." />
+            &lt;/classpath>
+        &lt;/javac>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="jar" depends="compile" description="make jar file">
+        &lt;jar
+            jarfile="${package}.jar"
+            basedir="${destdir}"
+            manifest="${package}.mf">
+        &lt;/jar>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="clean" description="cleaning">
+        &lt;delete dir="${destdir}" />
+        &lt;delete file="${package}.jar" />
+        &lt;delete dir="${docdir}" />
+        &lt;delete dir="${instdir}" />
+        &lt;delete file="../${zipname}.zip" />
+        &lt;delete>
+            &lt;fileset dir="${package}" includes="*.class" />
+        &lt;/delete>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="test" depends="all" description="test">
+        &lt;exec executable="java" spawn="false">
+            &lt;arg line="-Dfile.encoding=UTF-8 -Xmx512m -Xss1024k -jar ${package}.jar" />
+        &lt;/exec>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="install" depends="all" description="install into application">
+        &lt;copy file="${package}.jar" todir="${instdir}" />
+        &lt;exec executable="chmod">
+            &lt;arg line="755 ${instdir}/../../MacOS/applet" />
+        &lt;/exec>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="doc" depends="all" description="make document (javadoc)">
+        &lt;mkdir dir="${docdir}" />
+        &lt;javadoc
+            locale="ja_JP"
+            sourcepath="${basedir}"
+            destdir="${docdir}"
+            packagenames="${packagenames}"
+            author="true"
+            version="true"
+            charset="UTF-8"
+            encoding="UTF-8"
+            docencoding="UTF-8"
+            linksource="yes"
+            additionalparam="-J-Dfile.encoding=UTF-8"
+            access="private">
+            &lt;doctitle>${doc-title}&lt;/doctitle>
+            &lt;bottom>${copyright}&lt;/bottom>
+            &lt;classpath>
+                &lt;pathelement location="." />
+            &lt;/classpath>
+        &lt;/javadoc>
+        &lt;exec executable="open">
+            &lt;arg line="-a 'Safari' ${docdir}/index.html" />
+        &lt;/exec>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+    &lt;target name="zip" depends="clean" description="make zip file">
+        &lt;delete file="../${zipname}.zip" />
+        &lt;zip destfile="../${zipname}.zip">
+            &lt;zipfileset dir="." prefix="${zipname}" />
+        &lt;/zip>
+        &lt;exec executable="date" spawn="false" />
+    &lt;/target>
+
+&lt;/project></pre>
 
 
 

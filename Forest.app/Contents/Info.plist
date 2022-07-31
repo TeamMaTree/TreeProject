@@ -5,11 +5,11 @@
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>ja_JP</string>
 	<key>CFBundleExecutable</key>
 	<string>applet</string>
 	<key>CFBundleIconFile</key>
-	<string>applet</string>
+	<string>ForestIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.apple.ScriptEditor.id.Forest</string>
 	<key>CFBundleInfoDictionaryVersion</key>
