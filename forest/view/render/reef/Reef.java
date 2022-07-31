@@ -20,6 +20,7 @@ public class Reef implements Node, GenericRenderable<RendererBase>
     {
         this.text = text;
         this.parent = parent;
+        parent.AddChild(this);
     }
 
     @Override
@@ -34,6 +35,7 @@ public class Reef implements Node, GenericRenderable<RendererBase>
         return text;
     }
 
+    @Override
     public int GetIndent()
     {
         int indent = 1;
@@ -51,11 +53,9 @@ public class Reef implements Node, GenericRenderable<RendererBase>
     }
 
     @Override
-    public Reef CreateReef(String text)
+    public void AddChild(Reef reef)
     {
-        Reef result = new Reef(this, text);
-        children.add(result);
-        return result;
+        children.add(reef);
     }
 
     @Override

@@ -5,14 +5,13 @@ import forest.view.render.Node;
 
 public class Brunch implements GenericRenderable<RendererBase>
 {
-    public Node node1;
-    public Node node2;
+    public Node node;
 
     private RendererBase renderer;
 
-    public Brunch(Node node1, Node node2)
+    public Brunch(Node node)
     {
-       
+       this.node = node;
     }
 
     @Override
@@ -25,5 +24,10 @@ public class Brunch implements GenericRenderable<RendererBase>
     public void SetRenderer(RendererBase renderer)
     {
         this.renderer = renderer;
+    }
+
+    public Node GetTargetNode()
+    {
+        return node;
     }
 }

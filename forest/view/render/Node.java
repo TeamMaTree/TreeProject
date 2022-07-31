@@ -8,8 +8,9 @@ public interface Node
 {
     public Vector2 GetPosition();
     public String GetText();
-    public Reef CreateReef(String test);
     public Node GetParent();
     public List<Reef> GetReadonlyChildren();
     public int GetIndex();
+    public void AddChild(Reef reef);
+    public int GetIndent();
 }

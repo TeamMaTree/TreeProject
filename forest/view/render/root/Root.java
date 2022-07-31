@@ -34,11 +34,15 @@ public class Root implements Node, GenericRenderable<RendererBase>
     }
 
     @Override
-    public Reef CreateReef(String text)
+    public void AddChild(Reef reef)
     {
-        Reef result = new Reef(this, text);
-        children.add(result);
-        return result;
+        children.add(reef);
+    }
+
+    @Override
+    public int GetIndent()
+    {
+        return 0;
     }
 
     @Override

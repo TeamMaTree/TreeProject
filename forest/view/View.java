@@ -14,7 +14,9 @@ import forest.Observable;
 import forest.controller.Controller;
 import forest.model.Model;
 import forest.view.render.root.Root;
+import forest.view.render.Node;
 import forest.view.render.Renderable;
+import forest.view.render.brunch.Brunch;
 import forest.view.render.reef.Reef;
 
 public class View 
@@ -27,68 +29,62 @@ public class View
 
     private Animator animator;
 
+    List<Renderable> rens = new ArrayList<>();
+    
     public void Show() 
     {
-        JFrame aWindow = new JFrame("");
+        JFrame aWindow = new JFrame("Forest");
 
         aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         aWindow.addNotify();
         int titleBarHeight = aWindow.getInsets().top;
         Point aPoint = new Point(600, 400);
         aWindow.setMinimumSize(new Dimension(aPoint.x, aPoint.y + titleBarHeight));
-        aWindow.setResizable(true);
+        aWindow.setResizable(false);
         aWindow.setSize(aPoint.x, aPoint.y + titleBarHeight);
         aWindow.setLocation(100, 100);
 
         JPanel mainPanel = new JPanel(null);
         mainPanel.setBounds(0, 0, aWindow.getWidth(), aWindow.getHeight() - 28);
 
-        List<Renderable> rens = new ArrayList<>();
-
         Root root = new Root("Root");
         root.SetRenderer(new forest.view.renderer.swing.RootRenderer(mainPanel));
         rens.add(root);
+        AddReef(root, mainPanel, "a");
+        AddReef(root, mainPanel, "a");
 
-        Reef reef1 = root.CreateReef("Reeeeeeeeef1");
-        reef1.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-        rens.add(reef1);
+        Reef r = AddReef(root, mainPanel, "ab");
+        AddReef(r, mainPanel, "ab");
+        AddReef(r, mainPanel, "ab");
 
-        Reef reef2 = reef1.CreateReef("Reef2");
-        reef2.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-        rens.add(reef2);
+        Reef c = AddReef(r, mainPanel, "ac");
+        AddReef(c, mainPanel, "ac");
+        AddReef(c, mainPanel, "ac");
 
-        Reef reef3 = reef1.CreateReef("Reef3");
-        reef3.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-        rens.add(reef3);
-
-        for(int i = 0; i < 5; i++)
-        {
-            Reef reef4 = reef2.CreateReef("Reef" + i);
-            reef4.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-            rens.add(reef4);
-            for(int j = 0; j < 2; j++)
-            {
-                Reef reef5 = reef4.CreateReef("Reef" + j);
-                reef5.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-                rens.add(reef5);
-            }
-        }
-
-        for(int j = 0; j < 2; j++)
-        {
-            Reef reef5 = reef3.CreateReef("Reef" + j);
-            reef5.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
-            rens.add(reef5);
-        }
-
-        for (Renderable renderable : rens)
-        {
-            renderable.Update();
-        }
+        Reef d = AddReef(r, mainPanel, "ad");
+        AddReef(d, mainPanel, "ad");
+        AddReef(d, mainPanel, "ad");
 
         aWindow.add(mainPanel);
+
         aWindow.setVisible(true);
         aWindow.toFront();
+        
+        for (Renderable renderable : rens) renderable.Update();
+    }
+
+    private Reef AddReef(Node parentNode, JPanel parentJPanel, String text)
+    {
+        Reef reef = new Reef(parentNode, text);
+        reef.SetRenderer(new forest.view.renderer.swing.ReefRenderer(parentJPanel));
+
+        Brunch brunch = new Brunch(reef);
+        brunch.SetRenderer(new forest.view.renderer.swing.BrunchRenderer(parentJPanel));
+
+        rens.add(reef);
+        rens.add(brunch);
+
+        return reef;
     }
 
     public void PlayAnimation() 

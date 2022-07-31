@@ -1,14 +1,10 @@
 package forest.view.renderer.swing;
 
 import forest.view.render.root.Root;
+import forest.view.render.root.RendererBase;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import forest.view.render.root.RendererBase;
+import java.awt.Graphics;
 
 public class RootRenderer extends RendererBase 
 {
@@ -20,21 +16,14 @@ public class RootRenderer extends RendererBase
 	}
 
 	@Override
-	protected void DrawInternal(Root aRoot) 
+	protected void DrawInternal(Root aRoot)
 	{
+        Graphics gra = parentJComponent.getGraphics();
+
         int height = 15;
         int maxY = parentJComponent.getBounds().height - height;
 
-        JLabel label = new JLabel(aRoot.GetText());
-        label.setBorder(new LineBorder(Color.BLACK, 1, true));
-
-        label.setBounds(0, maxY / 2, getWidth(label.getText().length()), height);
-
-        parentJComponent.add(label);
+        gra.drawString(aRoot.GetText(), 0, maxY / 2);
+        gra.drawRect(0, (maxY / 2) - 12, Utility.getWidth(aRoot.GetText().length()), height);
 	}
-
-    private int getWidth(int stringCount)
-    {
-        return stringCount * 8;
-    }
 }
