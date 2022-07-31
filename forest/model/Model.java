@@ -32,6 +32,9 @@ public class Model
      */
     private List<Brunch> brunchList = new ArrayList<>(); 
 
+    /*
+     * Fileを引数とするモデルコンストラクタ
+     */
     public Model(File file) throws IOException 
     {
         FileReader fileReader = new FileReader(file);
@@ -71,8 +74,11 @@ public class Model
         }
     }
 
+    /*木の枝と葉を実装するインターフェース */
     List<Node> parents = new ArrayList<>();
+    /* 前のインデント */
     int prevIndent;
+    /* 前のインフェース */
     Node prevNode;
     
     /*

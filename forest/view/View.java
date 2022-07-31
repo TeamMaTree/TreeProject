@@ -28,6 +28,9 @@ public class View
      */
     private List<Renderable> rens = new ArrayList<>();
 
+    /*
+     * モデルを引数としたコンストラクタ
+     */
     public View(Model aModel) 
     {
         this.model = aModel;

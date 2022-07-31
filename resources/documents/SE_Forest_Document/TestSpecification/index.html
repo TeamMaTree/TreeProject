@@ -305,9 +305,9 @@ th {
             <td class="left-padding"><code><a href="../Program/index.html#Main">main(String[] arguments)</a></code></td>
             <td class="left-padding"><code>void</code></td>
             <td class="left-padding"><code>public static</code></td>
-            <td class="left-padding"></td>
+            <td class="left-padding">controllerのインスタンスを作成して、Forestアプリの実行が開始される。</td>
             <td class="left-padding">未</td>
-            <td class="left-padding"></td>
+
           </tr>
         </tbody>
       </table>
@@ -339,42 +339,42 @@ th {
             <td class="left-padding"><code>root</code></td>
             <td class="left-padding"><code>Root</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">木の親</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>reefs</code></td>
             <td class="left-padding"><code>List&lt;Reef></code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">木の葉のリスト</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>brunchs</code></td>
             <td class="left-padding"><code>List&lt;Brunch></code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">木の枝のリスト</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>parents</code></td>
             <td class="left-padding"><code>List&lt;Node></code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">木の枝と葉を実装するインターフェース</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>prevIndent</code></td>
             <td class="left-padding"><code>int</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">前のインデント</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>prevNode</code></td>
             <td class="left-padding"><code>Node</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">前のインタフェース</td>
             <td class="left-padding">未</td>
           </tr>
         </tbody>
@@ -400,14 +400,42 @@ th {
             <td class="left-padding"><code>Model(File file)</code></td>
             <td class="left-padding"><code>なし</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding"></td>
+            <td class="left-padding">Fileを引数とするモデルコンストラクタ</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
-            <td class="left-padding"><code>AddNode(int indent, String text)</code></td>
+            <td class="left-padding"><code>readFile(BufferedReader buffer)</code></td>
             <td class="left-padding"><code>void</code></td>
             <td class="left-padding"><code>private</code></td>
-            <td class="left-padding"></td>
+            <td class="left-padding">ファイルを読み込む</td>
+            <td class="left-padding">未</td>
+          </tr>
+          <tr>
+            <td class="left-padding"><code>addNode(int indent, String text)</code></td>
+            <td class="left-padding"><code>void</code></td>
+            <td class="left-padding"><code>private</code></td>
+            <td class="left-padding">ノードを追加する</td>
+            <td class="left-padding">未</td>
+          </tr>
+          <tr>
+            <td class="left-padding"><code>getRoot()</code></td>
+            <td class="left-padding"><code>Root</code></td>
+            <td class="left-padding"><code>public</code></td>
+            <td class="left-padding">木の親を取得する</td>
+            <td class="left-padding">未</td>
+          </tr>
+          <tr>
+            <td class="left-padding"><code>getReefList()</code></td>
+            <td class="left-padding"><code>List&lt;Reef></code></td>
+            <td class="left-padding"><code>public</code></td>
+            <td class="left-padding">木の葉のリストを取得する</td>
+            <td class="left-padding">未</td>
+          </tr>
+          <tr>
+            <td class="left-padding"><code>getBrunchList()</code></td>
+            <td class="left-padding"><code>List&lt;Brunch></code></td>
+            <td class="left-padding"><code>publiic</code></td>
+            <td class="left-padding">木の枝のリストを取得する</td>
             <td class="left-padding">未</td>
           </tr>
         </tbody>
@@ -438,28 +466,15 @@ th {
             <td class="left-padding"><code>model</code></td>
             <td class="left-padding"><code>Model</code></td>
             <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">表示する対象のモデル</td>
             <td class="left-padding">未</td>
           </tr>
-          <tr>
-            <td class="left-padding"><code>controller</code></td>
-            <td class="left-padding"><code>Controller</code></td>
-            <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
-            <td class="left-padding">未</td>
-          </tr>
-          <tr>
-            <td class="left-padding"><code>animator</code></td>
-            <td class="left-padding"><code>Animator</code></td>
-            <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
-            <td class="left-padding">未</td>
-          </tr>
+
           <tr>
             <td class="left-padding"><code>rens</code></td>
             <td class="left-padding"><code>List&lt;Renderable></code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">表示する物のリスト</td>
             <td class="left-padding">未</td>
           </tr>
 
@@ -486,21 +501,14 @@ th {
             <td class="left-padding"><code>View(Model aModel)</code></td>
             <td class="left-padding"><code>なし</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding"></td>
+            <td class="left-padding">モデルを引数としたコンストラクタ</td>
             <td class="left-padding">未</td>
           </tr>
           <tr>
             <td class="left-padding"><code>Show()</code></td>
             <td class="left-padding"><code>void</code></td>
             <td class="left-padding"><code>public</code></td>
-            <td class="left-padding"></td>
-            <td class="left-padding">未</td>
-          </tr>
-          <tr>
-            <td class="left-padding"><code>PlayAnimation()</code></td>
-            <td class="left-padding"><code>void</code></td>
-            <td class="left-padding"><code>public</code></td>
-            <td class="left-padding"></td>
+            <td class="left-padding">表示する</td>
             <td class="left-padding">未</td>
           </tr>
         </tbody>
@@ -528,38 +536,18 @@ th {
             <th class="left-padding" abbr="5">テスト結果</th>
           </tr>
           <tr>
-            <td class="left-padding"><code>modelList</code></td>
-            <td class="left-padding"><code>ArrayList&lt;Renderable></code></td>
-            <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
-            <td class="left-padding">未</td>
-          </tr>
-          <tr>
             <td class="left-padding"><code>model</code></td>
             <td class="left-padding"><code>Model</code></td>
             <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">対象のモデル</td>
             <td class="left-padding">未</td>
           </tr>
+
           <tr>
-            <td class="left-padding"><code>parser</code></td>
-            <td class="left-padding"><code>Parser</code></td>
+            <td class="left-padding"><code>view</code></td>
+            <td class="left-padding"><code>View</code></td>
             <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
-            <td class="left-padding">未</td>
-          </tr>
-          <tr>
-            <td class="left-padding"><code>data</code></td>
-            <td class="left-padding"><code>Data</code></td>
-            <td class="left-padding"><code>private</code></td>
-            <td class="left-padding">なし</td>
-            <td class="left-padding">未</td>
-          </tr>
-          <tr>
-            <td class="left-padding"><code>なし</code></td>
-            <td class="left-padding"><code>なし</code></td>
-            <td class="left-padding"><code>なし</code></td>
-            <td class="left-padding">なし</td>
+            <td class="left-padding">対象のビュー</td>
             <td class="left-padding">未</td>
           </tr>
         </tbody>
@@ -582,12 +570,20 @@ th {
             <th class="left-padding" abbr="5">テスト結果</th>
           </tr>
           <tr>
-            <td class="left-padding"><code></code></td>
-            <td class="left-padding"><code></code></td>
-            <td class="left-padding"><code></code></td>
-            <td class="left-padding"></td>
-            <td class="left-padding"></td>
+            <td class="left-padding"><code>Controller() throws IOException</code></td>
+            <td class="left-padding"><code>なし</code></td>
+            <td class="left-padding"><code>public</code></td>
+            <td class="left-padding">コントローラのコンストラクタ</td>
+            <td class="left-padding">未</td>
           </tr>
+          <tr>
+            <td class="left-padding"><code>open()</code></td>
+            <td class="left-padding"><code>void</code></td>
+            <td class="left-padding"><code>public</code></td>
+            <td class="left-padding">表示する</td>
+            <td class="left-padding">未</td>
+          </tr>
+
         </tbody>
       </table>
       </td>

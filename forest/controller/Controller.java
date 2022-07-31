@@ -22,6 +22,9 @@ public class Controller
      */
     private View view;
 
+    /*
+     * コントローラのコンストラクタ
+     */
     public Controller() throws IOException 
     {
         JFrame aWindow = new JFrame("Forest");
