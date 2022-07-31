@@ -16,14 +16,14 @@ public class RootRenderer extends RendererBase
 	}
 
 	@Override
-	protected void DrawInternal(Root aRoot)
+	protected void drawInternal(Root aRoot)
 	{
         Graphics gra = parentJComponent.getGraphics();
 
         int height = 15;
         int maxY = parentJComponent.getBounds().height - height;
 
-        gra.drawString(aRoot.GetText(), 0, maxY / 2);
-        gra.drawRect(0, (maxY / 2) - 12, Utility.getWidth(aRoot.GetText().length()), height);
+        gra.drawString(aRoot.getText(), 0, maxY / 2);
+        gra.drawRect(0, (maxY / 2) - 12, Utility.getWidth(aRoot.getText().length()), height);
 	}
 }

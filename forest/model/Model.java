@@ -14,17 +14,31 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.Reader;
 
+/*
+ * モデル
+ */
 public class Model 
 {
-    public Root root;
-    public List<Reef> reefs = new ArrayList<>(); 
-    public List<Brunch> brunchs = new ArrayList<>(); 
+    private Root root;
+    private List<Reef> reefList = new ArrayList<>(); 
+    private List<Brunch> brunchList = new ArrayList<>(); 
 
     public Model(File file) throws IOException 
     {
         FileReader fileReader = new FileReader(file);
         BufferedReader buffer = new BufferedReader((Reader)fileReader);
 
+        readFile(buffer);
+
+        fileReader.close();
+        buffer.close();
+    }
+
+    /*
+     * ファイルを読み込む
+     */
+    private void readFile(BufferedReader buffer) throws IOException 
+    {
         String line;
         while ((line = buffer.readLine()) != null) 
         {
@@ -44,18 +58,18 @@ public class Model
                 indent++;
             }
 
-            AddNode(indent, line.substring(lastN));
+            addNode(indent, line.substring(lastN));
         }
-
-        fileReader.close();
-        buffer.close();
     }
 
     List<Node> parents = new ArrayList<>();
     int prevIndent;
     Node prevNode;
-        
-    private void AddNode(int indent, String text)
+    
+    /*
+     * ノードを追加する
+     */
+    private void addNode(int indent, String text)
     {
         if (indent == 0) 
         {
@@ -70,9 +84,24 @@ public class Model
             prevIndent = indent;
 
             Reef reef = new Reef(parents.get(parents.size() - 1), text);
-            reefs.add(reef);
-            brunchs.add(new Brunch(reef));
+            reefList.add(reef);
+            brunchList.add(new Brunch(reef));
             prevNode = reef;
         }
+    }
+
+    public Root getRoot()
+    {
+        return root;
+    }
+
+    public List<Reef> getReefList()
+    {
+        return reefList;
+    }
+
+    public List<Brunch> getBrunchList()
+    {
+        return brunchList;
     }
 }

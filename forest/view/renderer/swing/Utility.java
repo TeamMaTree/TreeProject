@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Utility 
 {
+    /*
+     * ノードから表示すべきy座標を取得
+     */
     public static int getY(Node node, int minY, int maxY)
     {
         List<Integer> separates = new ArrayList<>();
@@ -15,11 +18,11 @@ public class Utility
         
         Node parentNode = node;
 
-        for (int i = 0; i < node.GetIndent(); i++)
+        for (int i = 0; i < node.getIndent(); i++)
         {
-            indexs.add(parentNode.GetIndex());
-            parentNode = parentNode.GetParent();
-            separates.add(parentNode.GetReadonlyChildren().size());
+            indexs.add(parentNode.getIndex());
+            parentNode = parentNode.getParent();
+            separates.add(parentNode.getReadonlyChildren().size());
         }
 
         Collections.reverse(separates);
@@ -37,21 +40,27 @@ public class Utility
         return (maxY - minY) / 2 + minY;
     }
 
+    /*
+     * ノードから表示すべきx座標を取得
+     */
     public static int getX(Node node)
     {
         int strCount = 0;
         Node parentNode = node;
 
-        for (int i = 0; i < node.GetIndent(); i++)
+        for (int i = 0; i < node.getIndent(); i++)
         {
-            parentNode = parentNode.GetParent();
+            parentNode = parentNode.getParent();
 
-            strCount += parentNode.GetText().length() + 2;
+            strCount += parentNode.getText().length() + 2;
         }
         
         return getWidth(strCount);
     }
 
+    /*
+     * 文字列の横幅を取得
+     */
     public static int getWidth(int stringCount)
     {
         return stringCount * 10;

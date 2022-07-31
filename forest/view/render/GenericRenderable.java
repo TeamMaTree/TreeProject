@@ -2,5 +2,8 @@ package forest.view.render;
 
 public interface GenericRenderable<RenderType> extends Renderable 
 {
-	public abstract void SetRenderer(RenderType renderer);
+    /*
+     * レンダラーを登録する
+     */
+	public abstract void setRenderer(RenderType renderer);
 }

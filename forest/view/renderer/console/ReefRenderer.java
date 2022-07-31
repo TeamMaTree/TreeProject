@@ -6,8 +6,9 @@ import forest.view.render.reef.RendererBase;
 public class ReefRenderer extends RendererBase 
 {
 	@Override
-	protected void DrawInternal(Reef aReef) 
+	protected void drawInternal(Reef aReef) 
 	{
-
+		for(int i = 0; i < aReef.getIndent(); i++) System.out.print(" ");
+        System.out.println(aReef.getText());
 	}
 }

@@ -2,13 +2,13 @@ package forest.view.render.reef;
 
 public abstract class RendererBase
 {
-    void Draw(Reef aReef)
+    void draw(Reef aReef)
     {
-        DrawInternal(aReef);
+        drawInternal(aReef);
     }
     
     /**
      * Reefを描画する
      */
-    protected abstract void DrawInternal(Reef aReef);
+    protected abstract void drawInternal(Reef aReef);
 }

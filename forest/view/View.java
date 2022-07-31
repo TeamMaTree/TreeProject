@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import forest.Animator;
-import forest.controller.Controller;
 import forest.model.Model;
 import forest.view.render.Renderable;
 import forest.view.render.brunch.Brunch;
@@ -19,19 +17,16 @@ import forest.view.render.reef.Reef;
 public class View 
 {
     private Model model;
-
-    private Controller controller;
-
-    //private Observable observable;
-
-    List<Renderable> rens = new ArrayList<>();
-    private Animator animator;
+    private List<Renderable> rens = new ArrayList<>();
 
     public View(Model aModel) 
     {
         this.model = aModel;
     }
 
+    /*
+     * 表示する
+     */
     public void Show() 
     {
         JFrame aWindow = new JFrame("Forest");
@@ -52,26 +47,24 @@ public class View
         aWindow.setVisible(true);
         aWindow.toFront();
 
-        model.root.SetRenderer(new forest.view.renderer.swing.RootRenderer(mainPanel));
-        rens.add(model.root);
+        model.getRoot().setRenderer(new forest.view.renderer.swing.RootRenderer(mainPanel));
+        //model.getRoot().setRenderer(new forest.view.renderer.console.RootRenderer());
+        rens.add(model.getRoot());
         
-        for (Reef reef : model.reefs) 
+        for (Reef reef : model.getReefList()) 
         {
-            reef.SetRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
+            reef.setRenderer(new forest.view.renderer.swing.ReefRenderer(mainPanel));
+            //reef.setRenderer(new forest.view.renderer.console.ReefRenderer());
             rens.add(reef);
         }
 
-        for (Brunch brunch : model.brunchs) 
+        for (Brunch brunch : model.getBrunchList()) 
         {
-            brunch.SetRenderer(new forest.view.renderer.swing.BrunchRenderer(mainPanel));
+            brunch.setRenderer(new forest.view.renderer.swing.BrunchRenderer(mainPanel));
+            //brunch.setRenderer(new forest.view.renderer.console.BrunchRenderer());
             rens.add(brunch);
         }
         
-        for (Renderable renderable : rens) renderable.Update();
-    }
-
-    public void PlayAnimation() 
-    {
-
+        for (Renderable renderable : rens) renderable.update();
     }
 }

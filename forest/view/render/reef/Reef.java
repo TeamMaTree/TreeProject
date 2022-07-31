@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import forest.Vector2;
 import forest.view.render.Node;
 
+/*
+ * 葉
+ */
 public class Reef implements Node, GenericRenderable<RendererBase>
 {
     private List<Reef> children = new ArrayList<>();
@@ -20,77 +22,71 @@ public class Reef implements Node, GenericRenderable<RendererBase>
     {
         this.text = text;
         this.parent = parent;
-        parent.AddChild(this);
+        parent.addChild(this);
     }
 
     @Override
-    public Vector2 GetPosition()
-    {
-        return null;
-    }
-
-    @Override
-    public String GetText()
+    public String getText()
     {
         return text;
     }
 
     @Override
-    public int GetIndent()
+    public int getIndent()
     {
         int indent = 1;
         Node parentNode = parent;
-        Node nextParentNode = parentNode.GetParent();
+        Node nextParentNode = parentNode.getParent();
         
         while (nextParentNode != null)
         {
             indent++;
             parentNode = nextParentNode;
-            nextParentNode = parentNode.GetParent();
+            nextParentNode = parentNode.getParent();
         }
 
         return indent;
     }
 
     @Override
-    public void AddChild(Reef reef)
+    public void addChild(Reef reef)
     {
         children.add(reef);
     }
 
     @Override
-	public void Update()
+	public void update()
     {
-        renderer.Draw(this);
+        renderer.draw(this);
     }
     
     @Override
-	public void SetRenderer(RendererBase renderer)
+	public void setRenderer(RendererBase renderer)
     {
         this.renderer = renderer;
     }
 
     @Override
-    public Node GetParent()
+    public Node getParent()
     {
         return parent;
     }
     
-    public Root GetRoot()
+    public Root getRoot()
     {
         Node parentNode = parent;
 
-        int indent = GetIndent();
-        for (int i = 0; i < indent; i++) parentNode = parentNode.GetParent();
+        int indent = getIndent();
+        for (int i = 0; i < indent; i++) parentNode = parentNode.getParent();
 
         return (Root)parentNode;
     }
 
     @Override
-    public int GetIndex()
+    public int getIndex()
     {
         int result = 0;
-        List<Reef> parentsChildren = parent.GetReadonlyChildren();
+        List<Reef> parentsChildren = parent.getReadonlyChildren();
         for(; result < parentsChildren.size(); result++)
         {
             if (parentsChildren.get(result) == this) break;
@@ -99,7 +95,7 @@ public class Reef implements Node, GenericRenderable<RendererBase>
     }
     
     @Override
-    public List<Reef> GetReadonlyChildren()
+    public List<Reef> getReadonlyChildren()
     {
         return Collections.unmodifiableList(children);
     }

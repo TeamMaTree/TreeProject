@@ -6,8 +6,8 @@ import forest.view.render.brunch.RendererBase;
 public class BrunchRenderer extends RendererBase 
 {
 	@Override
-	protected void DrawInternal(Brunch aBrunch)
+	protected void drawInternal(Brunch aBrunch)
 	{
-        
+        System.out.println(aBrunch.node.getParent().getText() + " -- " + aBrunch.node.getText());
 	}
 }

@@ -2,5 +2,8 @@ package forest.view.render;
 
 public interface Renderable 
 {
-	public abstract void Update();
+    /*
+     * 表示を更新する
+     */
+	public abstract void update();
 }

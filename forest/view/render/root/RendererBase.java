@@ -2,13 +2,13 @@ package forest.view.render.root;
 
 public abstract class RendererBase
 {
-    void Draw(Root aRoot)
+    void draw(Root aRoot)
     {
-        DrawInternal(aRoot);
+        drawInternal(aRoot);
     }
 
     /**
      * Rootを描画する
      */
-    protected abstract void DrawInternal(Root aRoot);
+    protected abstract void drawInternal(Root aRoot);
 }

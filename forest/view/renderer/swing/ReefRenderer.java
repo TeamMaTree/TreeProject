@@ -15,7 +15,7 @@ public class ReefRenderer extends forest.view.render.reef.RendererBase
     }
 
     @Override
-    protected void DrawInternal(Reef aReef) 
+    protected void drawInternal(Reef aReef) 
     {
         Graphics gra = parentJComponent.getGraphics();
 
@@ -23,14 +23,14 @@ public class ReefRenderer extends forest.view.render.reef.RendererBase
         int maxY = parentJComponent.getBounds().height - height;
         
         gra.drawString(
-            aReef.GetText(), 
+            aReef.getText(), 
             Utility.getX(aReef),
             Utility.getY(aReef, parentJComponent.getBounds().y, maxY));
 
         gra.drawRect(
             Utility.getX(aReef), 
             Utility.getY(aReef, 0, maxY) - 12, 
-            Utility.getWidth(aReef.GetText().length()),
+            Utility.getWidth(aReef.getText().length()),
             height);
     }
 }

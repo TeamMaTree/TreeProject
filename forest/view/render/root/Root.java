@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import forest.view.render.GenericRenderable;
-import forest.Vector2;
 import forest.view.render.Node;
 import forest.view.render.reef.Reef;
 
@@ -13,7 +12,6 @@ public class Root implements Node, GenericRenderable<RendererBase>
 {
     protected List<Reef> children = new ArrayList<>();
     protected RendererBase renderer;
-    protected Vector2 position;
     protected String text;
 
     public Root(String text)
@@ -22,55 +20,49 @@ public class Root implements Node, GenericRenderable<RendererBase>
     }
 
     @Override
-    public Vector2 GetPosition()
-    {
-        return position;
-    }
-
-    @Override
-    public String GetText()
+    public String getText()
     {
         return text;
     }
 
     @Override
-    public void AddChild(Reef reef)
+    public void addChild(Reef reef)
     {
         children.add(reef);
     }
 
     @Override
-    public int GetIndent()
+    public int getIndent()
     {
         return 0;
     }
 
     @Override
-	public void Update()
+	public void update()
     {
-        renderer.Draw(this);
+        renderer.draw(this);
     }
     
     @Override
-	public void SetRenderer(RendererBase renderer)
+	public void setRenderer(RendererBase renderer)
     {
         this.renderer = renderer;
     }
     
     @Override
-    public Node GetParent()
+    public Node getParent()
     {
         return null;
     }
     
     @Override
-    public List<Reef> GetReadonlyChildren()
+    public List<Reef> getReadonlyChildren()
     {
         return Collections.unmodifiableList(children);
     }
 
     @Override
-    public int GetIndex()
+    public int getIndex()
     {
         return 0;
     }

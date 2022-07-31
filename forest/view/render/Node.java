@@ -1,16 +1,35 @@
 package forest.view.render;
 
-import forest.Vector2;
 import forest.view.render.reef.Reef;
 import java.util.List;
 
+/*
+ * ノード
+ */
 public interface Node
 {
-    public Vector2 GetPosition();
-    public String GetText();
-    public Node GetParent();
-    public List<Reef> GetReadonlyChildren();
-    public int GetIndex();
-    public void AddChild(Reef reef);
-    public int GetIndent();
+    /*
+     * 表示するテキストを取得
+     */
+    public String getText();
+    /*
+     * 親を取得
+     */
+    public Node getParent();
+    /*
+     * 子供のリストを取得
+     */
+    public List<Reef> getReadonlyChildren();
+    /*
+     * 自身が親に何番目として登録されているか取得
+     */
+    public int getIndex();
+    /*
+     * 子供を追加する
+     */
+    public void addChild(Reef reef);
+    /*
+     * 階層の深さを取得
+     */
+    public int getIndent();
 }

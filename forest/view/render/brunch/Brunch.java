@@ -3,6 +3,9 @@ package forest.view.render.brunch;
 import forest.view.render.GenericRenderable;
 import forest.view.render.Node;
 
+/*
+ * 線
+ */
 public class Brunch implements GenericRenderable<RendererBase>
 {
     public Node node;
@@ -15,18 +18,18 @@ public class Brunch implements GenericRenderable<RendererBase>
     }
 
     @Override
-	public void Update()
+	public void update()
     {
-        renderer.Draw(this);
+        renderer.draw(this);
     }
 
     @Override
-    public void SetRenderer(RendererBase renderer)
+    public void setRenderer(RendererBase renderer)
     {
         this.renderer = renderer;
     }
 
-    public Node GetTargetNode()
+    public Node getTargetNode()
     {
         return node;
     }

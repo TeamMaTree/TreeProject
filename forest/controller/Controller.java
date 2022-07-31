@@ -1,23 +1,37 @@
 package forest.controller;
 
-import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-import forest.Data;
-import forest.File;
-import forest.Parser;
+import forest.view.View;
 import forest.model.Model;
-import forest.view.render.Renderable;
+import java.io.IOException;
 
+/*
+ * コントローラー
+ */
 public class Controller 
 {
-	private ArrayList<Renderable> modelList;
+    private Model model;
+    private View view;
 
-	private Model model;
+    public Controller() throws IOException 
+    {
+        JFrame aWindow = new JFrame("Forest");
+        JFileChooser filechooser = new JFileChooser();
+        filechooser.setFileFilter(new FileNameExtensionFilter("*.txt", "txt")); 
+        filechooser.showOpenDialog(aWindow);
 
-	private File file;
+        model = new Model(filechooser.getSelectedFile());
+    }
 
-	private Parser parser;
-
-	private Data data;
-
+    /*
+     * 表示する
+     */
+    public void open()
+    {
+        view = new View(model);
+        view.Show();
+    }
 }
